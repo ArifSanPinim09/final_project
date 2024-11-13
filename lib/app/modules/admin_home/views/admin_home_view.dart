@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/home_controller.dart';
+import '../controllers/admin_home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+class AdminHomeView extends GetView<AdminHomeController> {
+  const AdminHomeView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text('AdminHomeView'),
         actions: [
           IconButton(
               onPressed: () async {
@@ -41,7 +41,7 @@ class HomeView extends GetView<HomeController> {
       ),
       body: const Center(
         child: Text(
-          'INI HALAMAN HOME PENYEWA',
+          'INI HALAMAN HOME PENGELOLA',
           style: TextStyle(fontSize: 20),
         ),
       ),

@@ -33,13 +33,6 @@ class SplashView extends GetView<SplashController> {
                 color: Color(0xff211A2C),
               ),
             ),
-            const Text(
-              'Gaslah!',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xff211A2C),
-              ),
-            ),
           ],
         ),
       ),

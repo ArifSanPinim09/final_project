@@ -14,7 +14,7 @@ class SplashView extends GetView<SplashController> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/images/logo.png"),
+            Image.asset("assets/images/logo1.png"),
             const SizedBox(
               height: 10.0,
             ),

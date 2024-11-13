@@ -10,6 +10,6 @@ class SplashController extends GetxController {
 
   void navigateToHome() async {
     await Future.delayed(const Duration(seconds: 3));
-    Get.offAllNamed(Routes.HOME);
+    Get.offAllNamed(Routes.LOGIN);
   }
 }

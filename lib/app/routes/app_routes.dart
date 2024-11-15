@@ -8,6 +8,8 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const COMPLETE_PROFILE = _Paths.COMPLETE_PROFILE;
   static const ADMIN_HOME = _Paths.ADMIN_HOME;
+  static const ADMIN_NAVBAR = _Paths.ADMIN_NAVBAR;
+  static const ADMIN_FIELD = _Paths.ADMIN_FIELD;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const COMPLETE_PROFILE = '/complete-profile';
   static const ADMIN_HOME = '/admin-home';
+  static const ADMIN_NAVBAR = '/admin-navbar';
+  static const ADMIN_FIELD = '/admin-field';
 }

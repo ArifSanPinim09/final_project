@@ -51,7 +51,7 @@ class AuthService extends GetxService {
       if (user.role == 'penyewa') {
         Get.offAllNamed('/home');
       } else if (user.role == 'pengelola') {
-        Get.offAllNamed('/admin-home');
+        Get.offAllNamed('/admin-navbar');
       } else {
         Get.snackbar('Error', 'Role tidak valid');
       }

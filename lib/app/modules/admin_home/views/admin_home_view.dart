@@ -81,8 +81,6 @@ class AdminHomeView extends GetView<AdminHomeController> {
                 ],
               ),
             ),
-
-            // Riwayat
             Padding(
               padding: const EdgeInsets.only(
                 top: 20,

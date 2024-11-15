@@ -7,7 +7,7 @@ import '../controllers/admin_home_controller.dart';
 
 class AdminHomeView extends GetView<AdminHomeController> {
   const AdminHomeView({super.key});
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffF5F5F5),
@@ -27,7 +27,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 12.0),
+                  const SizedBox(height: 22.0),
                   Row(
                     children: [
                       ClipRRect(
@@ -240,7 +240,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
 class IncomeCard extends StatelessWidget {
   final String title;
   final String desc;
-  const IncomeCard ({
+  const IncomeCard({
     super.key,
     required this.title,
     required this.desc,
@@ -279,7 +279,7 @@ class IncomeCard extends StatelessWidget {
               color: const Color(0xff211A2C),
               fontFamily: 'Mulish',
               fontSize: 36,
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           ),
         ],
@@ -287,4 +287,3 @@ class IncomeCard extends StatelessWidget {
     );
   }
 }
-

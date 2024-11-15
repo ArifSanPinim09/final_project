@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_field/bindings/admin_field_binding.dart';
+import '../modules/admin_field/views/admin_field_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
 import '../modules/admin_navbar/bindings/admin_navbar_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.ADMIN_NAVBAR,
       page: () => const AdminNavbarView(),
       binding: AdminNavbarBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_FIELD,
+      page: () => const AdminFieldView(),
+      binding: AdminFieldBinding(),
     ),
   ];
 }

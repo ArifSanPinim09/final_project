@@ -1,3 +1,4 @@
+import 'package:final_project/app/modules/admin_field/views/admin_field_view.dart';
 import 'package:final_project/app/modules/admin_home/views/admin_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,12 +8,7 @@ class AdminNavbarController extends GetxController {
 
   static const List<Widget> pages = [
     AdminHomeView(),
-    Center(
-      child: Text(
-        'Lapangan',
-        style: TextStyle(fontSize: 24),
-      ),
-    ),
+    AdminFieldView(),
     Center(
       child: Text(
         'Pendapatan',

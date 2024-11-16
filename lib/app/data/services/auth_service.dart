@@ -49,7 +49,7 @@ class AuthService extends GetxService {
       Get.offAllNamed('/complete-profile');
     } else if (user != null && user.isProfileComplete) {
       if (user.role == 'penyewa') {
-        Get.offAllNamed('/home');
+        Get.offAllNamed('/user-navbar');
       } else if (user.role == 'pengelola') {
         Get.offAllNamed('/admin-navbar');
       } else {

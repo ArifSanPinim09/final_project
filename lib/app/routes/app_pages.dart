@@ -14,6 +14,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/user_navbar/bindings/user_navbar_binding.dart';
+import '../modules/user_navbar/views/user_navbar_view.dart';
 
 part 'app_routes.dart';
 
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.ADMIN_FIELD,
       page: () => const AdminFieldView(),
       binding: AdminFieldBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_NAVBAR,
+      page: () => const UserNavbarView(),
+      binding: UserNavbarBinding(),
     ),
   ];
 }

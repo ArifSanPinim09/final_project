@@ -159,6 +159,41 @@ class AdminAddFieldView extends GetView<AdminAddFieldController> {
               ),
               SizedBox(height: 20,),
               Text(
+                "Jenis Lapangan",
+                style: TextStyle(
+                  color: Color(0xff211A2C),
+                  fontSize: 15,
+                  fontFamily: 'Mulish',
+                ),
+              ),
+              SizedBox(height: 10,),
+              Obx((){
+                return Container(
+                  padding: EdgeInsets.only(left: 10,right: 20),
+                  decoration: BoxDecoration(
+                    color: Appcolors.gray,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: DropdownButton <String>(
+                    dropdownColor: Appcolors.gray,
+                    focusColor: Appcolors.yellow,
+                    value: controller.category.value,
+                    items: <String>["Basket", "Baseball", "Bulutangkis", "Cricket", "Futsal", "Golf", "Hoki", "Sepak Bola", "Sepak Takraw", "Softball", "Tenis", "Tenis Meja", "Voli"].map((String item){
+                        return DropdownMenuItem(
+                          value: item,
+                          child: Text(item,style: TextStyle(color: Color(0xff211A2C)),),
+                        );
+                      }
+                    ).toList(),
+                    onChanged: (value){
+                      controller.category.value=value!;
+                    },
+                  ),
+                );
+              }),
+              
+              SizedBox(height: 20,),
+              Text(
                 "Fasilitas",
                 style: TextStyle(
                   color: Color(0xff211A2C),

@@ -14,6 +14,7 @@ class AdminAddFieldController extends GetxController {
 
   var returnedimage=Rx<XFile?>(null);
 
+  var category="Basket".obs;
   var discountselectbutton=SelectbuttonWidget([0,25,50,75,100]);
   var priceselectbutton=SelectbuttonWidget([100000,150000,200000,250000,300000,35000]);
   var facilitytogglebutton=TogglebuttonWidget(["Tempat Parkir","Mushola","Full CCTV","Ruang Tunggu","Ruang Ganti"]);

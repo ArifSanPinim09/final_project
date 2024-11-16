@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
 import 'package:get/get.dart';
 
-import '../controllers/admin_navbar_controller.dart';
+import '../controllers/user_navbar_controller.dart';
 
-class AdminNavbarView extends GetView<AdminNavbarController> {
-  const AdminNavbarView({super.key});
+class UserNavbarView extends GetView<UserNavbarController> {
+  const UserNavbarView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => AdminNavbarController.pages[controller.tabIndex.value]),
+      body: Obx(
+        () => UserNavbarController.pages[controller.tabIndex.value],
+      ),
       bottomNavigationBar: Obx(
         () => BottomNavigationBar(
           items: [
@@ -22,8 +25,8 @@ class AdminNavbarView extends GetView<AdminNavbarController> {
               label: 'Lapangan',
             ),
             bottomNavbarItem(
-              icon: 'assets/icons/ic_income.svg',
-              label: 'Pendapatan',
+              icon: 'assets/icons/Calendar.svg',
+              label: 'Pemesanan',
             ),
             bottomNavbarItem(
               icon: 'assets/icons/ic_profile.svg',

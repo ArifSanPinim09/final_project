@@ -10,6 +10,7 @@ abstract class Routes {
   static const ADMIN_HOME = _Paths.ADMIN_HOME;
   static const ADMIN_NAVBAR = _Paths.ADMIN_NAVBAR;
   static const ADMIN_FIELD = _Paths.ADMIN_FIELD;
+  static const ADMIN_ADD_FIELD = _Paths.ADMIN_ADD_FIELD;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const ADMIN_HOME = '/admin-home';
   static const ADMIN_NAVBAR = '/admin-navbar';
   static const ADMIN_FIELD = '/admin-field';
+  static const ADMIN_ADD_FIELD = '/admin-add-field';
 }

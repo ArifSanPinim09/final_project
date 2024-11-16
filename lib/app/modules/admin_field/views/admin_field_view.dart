@@ -1,3 +1,4 @@
+import 'package:final_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -201,7 +202,9 @@ class AdminFieldView extends GetView<AdminFieldController> {
               height: 16.0,
             ),
             ButtonIcon(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(Routes.ADMIN_ADD_FIELD);
+              },
               text: 'Tambahkan  Lapangan',
               icon: Icons.add_circle_rounded,
             ),

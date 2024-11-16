@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/admin_add_field/bindings/admin_add_field_binding.dart';
+import '../modules/admin_add_field/views/admin_add_field_view.dart';
 import '../modules/admin_field/bindings/admin_field_binding.dart';
 import '../modules/admin_field/views/admin_field_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.ADMIN_FIELD,
       page: () => const AdminFieldView(),
       binding: AdminFieldBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_ADD_FIELD,
+      page: () => const AdminAddFieldView(),
+      binding: AdminAddFieldBinding(),
     ),
   ];
 }

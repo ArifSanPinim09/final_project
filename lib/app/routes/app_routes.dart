@@ -12,6 +12,9 @@ abstract class Routes {
   static const ADMIN_FIELD = _Paths.ADMIN_FIELD;
   static const ADMIN_ADD_FIELD = _Paths.ADMIN_ADD_FIELD;
   static const USER_NAVBAR = _Paths.USER_NAVBAR;
+  static const LAPANGAN = _Paths.LAPANGAN;
+  static const SEARCH = _Paths.SEARCH;
+  static const USER_SEARCH = _Paths.USER_SEARCH;
 }
 
 abstract class _Paths {
@@ -25,4 +28,7 @@ abstract class _Paths {
   static const ADMIN_FIELD = '/admin-field';
   static const ADMIN_ADD_FIELD = '/admin-add-field';
   static const USER_NAVBAR = '/user-navbar';
+  static const LAPANGAN = '/lapangan';
+  static const SEARCH = '/search';
+  static const USER_SEARCH = '/user-search';
 }

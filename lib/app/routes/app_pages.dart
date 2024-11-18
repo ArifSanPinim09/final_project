@@ -6,8 +6,12 @@ import '../modules/admin_field/bindings/admin_field_binding.dart';
 import '../modules/admin_field/views/admin_field_view.dart';
 import '../modules/admin_home/bindings/admin_home_binding.dart';
 import '../modules/admin_home/views/admin_home_view.dart';
+import '../modules/admin_income/bindings/admin_income_binding.dart';
+import '../modules/admin_income/views/admin_income_view.dart';
 import '../modules/admin_navbar/bindings/admin_navbar_binding.dart';
 import '../modules/admin_navbar/views/admin_navbar_view.dart';
+import '../modules/admin_profile/bindings/admin_profile_binding.dart';
+import '../modules/admin_profile/views/admin_profile_view.dart';
 import '../modules/complete_profile/bindings/complete_profile_binding.dart';
 import '../modules/complete_profile/views/complete_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -20,7 +24,6 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/user_navbar/bindings/user_navbar_binding.dart';
 import '../modules/user_navbar/views/user_navbar_view.dart';
-
 
 part 'app_routes.dart';
 
@@ -80,6 +83,15 @@ class AppPages {
       page: () => LapanganView(),
       binding: LapanganBinding(),
     ),
-    
+    GetPage(
+      name: _Paths.ADMIN_INCOME,
+      page: () => const AdminIncomeView(),
+      binding: AdminIncomeBinding(),
+    ),
+    GetPage(
+      name: _Paths.ADMIN_PROFILE,
+      page: () => const AdminProfileView(),
+      binding: AdminProfileBinding(),
+    ),
   ];
 }

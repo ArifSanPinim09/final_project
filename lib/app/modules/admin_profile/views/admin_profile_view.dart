@@ -1,9 +1,7 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:final_project/app/modules/widget/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:get/get.dart';
 
 import '../controllers/admin_profile_controller.dart';
@@ -105,7 +103,42 @@ class AdminProfileView extends GetView<AdminProfileController> {
               icon: 'assets/icons/ic_logout.svg',
               title: 'Keluar',
               showArrow: false,
-              onTap: () {},
+              onTap: () async {
+                final shouldLogout = await showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    backgroundColor: Colors.white,
+                    title: const Text(
+                      'Logout',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Mulish'),
+                    ),
+                    content: const Text(
+                      'Are you sure you want to logout?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontFamily: 'Mulish'),
+                    ),
+                    actions: [
+                      Button(
+                        onPressed: () => Navigator.pop(context, false),
+                        text: 'Cancel',
+                      ),
+                      const SizedBox(height: 8.0),
+                      Button(
+                        onPressed: () => Navigator.pop(context, true),
+                        text: 'Logout',
+                      ),
+                    ],
+                  ),
+                );
+                if (shouldLogout ?? false) {
+                  await controller.auth.signOut();
+                }
+              },
             ),
           ],
         ),

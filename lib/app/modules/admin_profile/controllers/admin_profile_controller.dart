@@ -1,23 +1,10 @@
+import 'package:final_project/app/data/services/auth_service.dart';
 import 'package:get/get.dart';
 
 class AdminProfileController extends GetxController {
-  //TODO: Implement AdminProfileController
+  final AuthService auth = Get.find<AuthService>();
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  Future<void> logout() async {
+    await auth.signOut();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

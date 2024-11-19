@@ -102,7 +102,6 @@ class KonfirmasiPembayaranView extends GetView<KonfirmasiPembayaranController> {
                     }, text: "Pembayaran"),
                   ],
                 ),
-                
             )
           ],),
       ),

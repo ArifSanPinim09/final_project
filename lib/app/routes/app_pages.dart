@@ -32,6 +32,8 @@ import '../modules/search_field/bindings/search_field_binding.dart';
 import '../modules/search_field/views/search_field_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/tiket/bindings/tiket_binding.dart';
+import '../modules/tiket/views/tiket_view.dart';
 import '../modules/user_navbar/bindings/user_navbar_binding.dart';
 import '../modules/user_navbar/views/user_navbar_view.dart';
 
@@ -127,6 +129,11 @@ class AppPages {
       name: _Paths.PEMBAYARAN_SUKSES,
       page: () => const PembayaranSuksesView(),
       binding: PembayaranSuksesBinding(),
+    ),
+    GetPage(
+      name: _Paths.TIKET,
+      page: () => const TiketView(),
+      binding: TiketBinding(),
     ),
   ];
 }

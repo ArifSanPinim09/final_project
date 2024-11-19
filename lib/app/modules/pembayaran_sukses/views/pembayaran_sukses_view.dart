@@ -1,5 +1,6 @@
 import 'package:final_project/app/materials/appcolors.dart';
 import 'package:final_project/app/modules/widget/button_widget.dart';
+import 'package:final_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -25,7 +26,6 @@ class PembayaranSuksesView extends GetView<PembayaranSuksesController> {
         backgroundColor: Appcolors.dark,
         scrolledUnderElevation: 0,
         leading: IconButton(onPressed: (){navigator?.pop(context);}, icon: SvgPicture.asset('assets/icons/arrow_left3.svg',colorFilter: ColorFilter.mode(Appcolors.yellow, BlendMode.srcIn),)),
-        
       ),
       bottomNavigationBar: Container(
         child: 
@@ -41,10 +41,9 @@ class PembayaranSuksesView extends GetView<PembayaranSuksesController> {
                   blurRadius: 20)
                 ]
               ),
-              child:
-                    Button(onPressed: (){
-                    }, text: "Lihat E-Tiket "),
-                
+              child: Button(onPressed: () {
+                Get.toNamed(Routes.TIKET);
+              }, text: "Lihat E-Tiket"),
             )
       ),
       body: Container(

@@ -22,6 +22,7 @@ abstract class Routes {
   static const PESANAN = _Paths.PESANAN;
   static const KONFIRMASI_PEMBAYARAN = _Paths.KONFIRMASI_PEMBAYARAN;
   static const PEMBAYARAN_SUKSES = _Paths.PEMBAYARAN_SUKSES;
+  static const TIKET = _Paths.TIKET;
 }
 
 abstract class _Paths {
@@ -45,4 +46,5 @@ abstract class _Paths {
   static const PESANAN = '/pesanan';
   static const KONFIRMASI_PEMBAYARAN = '/konfirmasi-pembayaran';
   static const PEMBAYARAN_SUKSES = '/pembayaran-sukses';
+  static const TIKET = '/tiket';
 }

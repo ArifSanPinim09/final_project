@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:final_project/app/modules/widget/button_widget.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -65,18 +65,18 @@ class HomeView extends GetView<HomeController> {
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          height: 50,
+                          width: 50,
                           color: const Color(0xFFC4CBDA),
-                        ),
-                        child: Image.asset(
-                          'assets/images/profile.png',
-                          height: 36,
-                          width: 36,
-                          fit: BoxFit.cover,
+                          child: Image.asset(
+                            'assets/images/profiles.png',
+                            height: 36,
+                            width: 36,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       const SizedBox(width: 10),
@@ -90,19 +90,33 @@ class HomeView extends GetView<HomeController> {
                             final shouldLogout = await showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
-                                title: const Text('Logout'),
+                                backgroundColor: Colors.white,
+                                title: const Text(
+                                  'Logout',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Mulish'),
+                                ),
                                 content: const Text(
-                                    'Are you sure you want to logout?'),
+                                  'Are you sure you want to logout?',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Mulish'),
+                                ),
                                 actions: [
-                                  TextButton(
+                                  Button(
                                     onPressed: () =>
                                         Navigator.pop(context, false),
-                                    child: const Text('Cancel'),
+                                    text: 'Cancel',
                                   ),
-                                  TextButton(
+                                  const SizedBox(height: 8.0),
+                                  Button(
                                     onPressed: () =>
                                         Navigator.pop(context, true),
-                                    child: const Text('Logout'),
+                                    text: 'Logout',
                                   ),
                                 ],
                               ),
@@ -111,7 +125,10 @@ class HomeView extends GetView<HomeController> {
                               await controller.auth.signOut();
                             }
                           },
-                          icon: const Icon(Icons.logout,color: Colors.white,)),
+                          icon: const Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                          )),
                     ],
                   ),
                   const SizedBox(height: 30),
@@ -271,116 +288,119 @@ class HomeView extends GetView<HomeController> {
                     itemBuilder: (context, index) {
                       final item = listLapangan[index];
                       return Transform.translate(
-                        offset: const Offset(0, -10), // Geser ke atas
-                        child: GestureDetector(
-                          onTap: (){
-                            Get.toNamed("field-detail");
-                          },
-                          child: SizedBox(
-                          height: 230,
-                          width: 260,
-                          child: Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40),
-                            ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                    height: 180,
-                                    width: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius: BorderRadius.circular(30),
-                                      image: DecorationImage(
-                                        image: NetworkImage(item['foto']),
-                                        fit: BoxFit.cover,
+                          offset: const Offset(0, -10), // Geser ke atas
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed("field-detail");
+                            },
+                            child: SizedBox(
+                              height: 230,
+                              width: 260,
+                              child: Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(40),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Container(
+                                        height: 180,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          image: DecorationImage(
+                                            image: NetworkImage(item['foto']),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          item['name'],
-                                          style: const TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          item['alamat'],
-                                          style: const TextStyle(
-                                            fontSize: 15,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
+                                      child: Column(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Icon(
-                                                item['icon'], // Ikon bintang
-                                                color: Colors.amber,
-                                                size: 25,
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              item['name'],
+                                              style: const TextStyle(
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.bold,
                                               ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                item['bintang'],
-                                                style: const TextStyle(
-                                                  fontSize: 15,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              item['alamat'],
+                                              style: const TextStyle(
+                                                fontSize: 15,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    item[
+                                                        'icon'], // Ikon bintang
+                                                    color: Colors.amber,
+                                                    size: 25,
+                                                  ),
+                                                  const SizedBox(width: 5),
+                                                  Text(
+                                                    item['bintang'],
+                                                    style: const TextStyle(
+                                                      fontSize: 15,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              // Harga
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: item['harga']
+                                                          .split('/')[0],
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    TextSpan(
+                                                      text:
+                                                          '/${item['harga'].split('/')[1]}',
+                                                      style: const TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.black,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
-                                          // Harga
-                                          RichText(
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text: item['harga']
-                                                      .split('/')[0],
-                                                  style: const TextStyle(
-                                                    fontSize: 20,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text:
-                                                      '/${item['harga'].split('/')[1]}',
-                                                  style: const TextStyle(
-                                                    fontSize: 15,
-                                                    color: Colors.black,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),)
-                      );
+                          ));
                     },
                     separatorBuilder: (context, index) =>
                         const SizedBox(width: 10),

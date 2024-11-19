@@ -36,6 +36,8 @@ import '../modules/tiket/bindings/tiket_binding.dart';
 import '../modules/tiket/views/tiket_view.dart';
 import '../modules/user_navbar/bindings/user_navbar_binding.dart';
 import '../modules/user_navbar/views/user_navbar_view.dart';
+import '../modules/user_profile/bindings/user_profile_binding.dart';
+import '../modules/user_profile/views/user_profile_view.dart';
 
 part 'app_routes.dart';
 
@@ -92,7 +94,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LAPANGAN,
-      page: () => LapanganView(),
+      page: () => const LapanganView(),
       binding: LapanganBinding(),
     ),
     GetPage(
@@ -134,6 +136,11 @@ class AppPages {
       name: _Paths.TIKET,
       page: () => const TiketView(),
       binding: TiketBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_PROFILE,
+      page: () => const UserProfileView(),
+      binding: UserProfileBinding(),
     ),
   ];
 }

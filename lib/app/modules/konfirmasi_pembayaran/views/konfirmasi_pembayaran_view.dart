@@ -98,7 +98,7 @@ class KonfirmasiPembayaranView extends GetView<KonfirmasiPembayaranController> {
                     ],),
                     SizedBox(height: 15),
                     Button(onPressed: (){
-                      Get.toNamed(Routes.KONFIRMASI_PEMBAYARAN);
+                      Get.toNamed(Routes.PEMBAYARAN_SUKSES);
                     }, text: "Pembayaran"),
                   ],
                 ),

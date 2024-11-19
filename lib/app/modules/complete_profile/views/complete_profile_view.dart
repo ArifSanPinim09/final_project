@@ -66,6 +66,15 @@ class CompleteProfileView extends GetView<CompleteProfileController> {
                 maxLines: 3,
               ),
               const SizedBox(height: 20),
+              TextField(
+                controller: controller.phoneController,
+                decoration: const InputDecoration(
+                  labelText: 'Nomor Hp yang terhubung ke WA',
+                  border: OutlineInputBorder(),
+                ),
+                maxLines: 3,
+              ),
+              const SizedBox(height: 20),
               const Text(
                 'Pilih Role Anda',
                 style: TextStyle(

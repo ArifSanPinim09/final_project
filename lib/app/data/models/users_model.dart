@@ -21,30 +21,34 @@ class UserModel {
     required this.updatedAt,
   });
 
-  Map<String, dynamic> toJson() => {
-        'uid': uid,
-        'name': name,
-        'email': email,
-        'phone': phone,
-        'birthDate': birthDate,
-        'address': address,
-        'role': role,
-        'createdAt': createdAt.toIso8601String(),
-        'updatedAt': updatedAt.toIso8601String(),
-      };
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        uid: json['uid'],
-        name: json['name'],
-        email: json['email'],
-        phone: json['phone'],
-        birthDate: json['birthDate'],
-        address: json['address'],
-        role: json['role'],
-        createdAt: DateTime.parse(json['createdAt']),
-        updatedAt: DateTime.parse(json['updatedAt']),
-      );
-
   bool get isProfileComplete =>
       name != null && birthDate != null && address != null && role != null;
+
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      uid: json['uid'],
+      name: json['name'],
+      email: json['email'],
+      phone: json['phone'],
+      birthDate: json['birthDate'],
+      address: json['address'],
+      role: json['role'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'uid': uid,
+      'name': name,
+      'email': email,
+      'phone': phone,
+      'birthDate': birthDate,
+      'address': address,
+      'role': role,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
 }

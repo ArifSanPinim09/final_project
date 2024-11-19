@@ -1,13 +1,14 @@
-import 'package:final_project/app/data/models/users_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/enums.dart';
+import 'package:final_project/app/data/config/appwrite_config.dart';
+import 'package:final_project/app/modules/login/views/login_view.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../models/users_model.dart';
 
 class AuthService extends GetxService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  late final Client client;
+  late final Account account;
+  late final Databases databases;
 
   final Rx<UserModel?> currentUser = Rx<UserModel?>(null);
 
@@ -15,65 +16,91 @@ class AuthService extends GetxService {
   void onInit() {
     super.onInit();
 
+    client = Client()
+        .setEndpoint(AppwriteConfig.endpoint)
+        .setProject(AppwriteConfig.projectId);
+
+    account = Account(client);
+    databases = Databases(client);
+
+    _checkCurrentUser();
+
     ever(currentUser, _handleUserChanged);
-    _auth.authStateChanges().listen(_handleAuthChanged);
   }
 
-  void _handleAuthChanged(User? firebaseUser) async {
-    if (firebaseUser != null) {
-      final userData =
-          await _db.collection('users').doc(firebaseUser.uid).get();
-      if (userData.exists) {
-        currentUser.value = UserModel.fromJson(userData.data()!);
-      } else {
-        final newUser = UserModel(
-          uid: firebaseUser.uid,
-          email: firebaseUser.email,
-          phone: firebaseUser.phoneNumber,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        );
-        await _db
-            .collection('users')
-            .doc(firebaseUser.uid)
-            .set(newUser.toJson());
-        currentUser.value = newUser;
-      }
-    } else {
+  Future<void> _checkCurrentUser() async {
+    try {
+      final user = await account.get();
+      await _loadUserData(user);
+    } catch (e) {
       currentUser.value = null;
+    }
+  }
+
+  Future<void> _loadUserData(dynamic user) async {
+    try {
+      // Coba ambil dokumen user
+      final response = await databases.getDocument(
+        databaseId: AppwriteConfig.databaseId,
+        collectionId: '673b134400091f1fdd26',
+        documentId: user.$id,
+      );
+
+      // Data ditemukan
+      currentUser.value = UserModel.fromJson({
+        ...response.data,
+        'uid': response.$id,
+      });
+    } catch (e) {
+      // Jika dokumen tidak ditemukan, buat dokumen baru
+      final newUser = UserModel(
+        uid: user.$id,
+        email: user.email,
+        phone: user.phone ?? '',
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+      );
+
+      await databases.createDocument(
+        databaseId: AppwriteConfig.databaseId,
+        collectionId: '673b134400091f1fdd26',
+        documentId: user.$id,
+        data: newUser.toJson(),
+      );
+
+      currentUser.value = newUser;
     }
   }
 
   void _handleUserChanged(UserModel? user) {
     if (user != null && !user.isProfileComplete) {
+      // Data user belum lengkap, arahkan ke halaman complete_profile
       Get.offAllNamed('/complete-profile');
     } else if (user != null && user.isProfileComplete) {
-      if (user.role == 'penyewa') {
-        Get.offAllNamed('/user-navbar');
-      } else if (user.role == 'pengelola') {
-        Get.offAllNamed('/admin-navbar');
-      } else {
-        Get.snackbar('Error', 'Role tidak valid');
+      // Data user lengkap, arahkan sesuai role
+      switch (user.role) {
+        case 'penyewa':
+          Get.offAllNamed('/user-navbar');
+          break;
+        case 'pengelola':
+          Get.offAllNamed('/admin-navbar');
+          break;
+        default:
+          Get.snackbar('Error', 'Role tidak valid');
+          Get.offAllNamed('/error-page'); // Redirect ke halaman error
       }
     }
   }
 
   Future<void> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return;
-
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      await _auth.signInWithCredential(credential);
-    } catch (e) {
-      Get.snackbar('Error', 'Failed to sign in with Google');
-      rethrow;
+      await account.createOAuth2Session(provider: OAuthProvider.google);
+      await Future.delayed(const Duration(microseconds: 500));
+      final user = await account.get();
+      await _loadUserData(user);
+    } on AppwriteException catch (e) {
+      print(e);
+      Get.snackbar('Error', 'Login gagal');
     }
   }
 
@@ -82,10 +109,12 @@ class AuthService extends GetxService {
     required String birthDate,
     required String address,
     required String role,
+    required String phone,
   }) async {
     try {
       final user = currentUser.value;
       if (user != null) {
+        // Perbarui data user
         final updatedUser = UserModel(
           uid: user.uid,
           name: name,
@@ -98,11 +127,14 @@ class AuthService extends GetxService {
           updatedAt: DateTime.now(),
         );
 
-        await _db
-            .collection('users')
-            .doc(user.uid)
-            .update(updatedUser.toJson());
+        await databases.updateDocument(
+          databaseId: AppwriteConfig.databaseId,
+          collectionId: '673b134400091f1fdd26',
+          documentId: user.uid,
+          data: updatedUser.toJson(),
+        );
 
+        // Update state currentUser
         currentUser.value = updatedUser;
       }
     } catch (e) {
@@ -113,13 +145,16 @@ class AuthService extends GetxService {
 
   Future<void> signOut() async {
     try {
-      await _auth.signOut();
-      await _googleSignIn.signOut();
+      // Hapus semua controller yang mungkin aktif
+      Get.reset(); // Reset seluruh GetX state
+
+      await account.deleteSession(sessionId: 'current');
       currentUser.value = null;
-      Get.offAllNamed('/login');
+
+      // Navigasi ke login
+      Get.offAll(() => const LoginView());
     } catch (e) {
-      Get.snackbar('Error', 'Failed to sign out');
-      rethrow;
+      Get.snackbar('Error', 'Gagal logout: ${e.toString()}');
     }
   }
 }

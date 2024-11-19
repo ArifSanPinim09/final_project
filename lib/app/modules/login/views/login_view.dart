@@ -105,7 +105,7 @@ class LoginView extends GetView<LoginController> {
                   elevation: 5,
                 ),
                 onPressed: () {
-                  controller.signInWithGoogle();
+                  controller.loginWithGoogle();
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

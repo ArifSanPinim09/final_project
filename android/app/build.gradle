@@ -31,6 +31,10 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+
+        manifestPlaceholders += [
+            'appAuthRedirectScheme': 'appwrite-callback-673aec1c002fb703b25f'
+        ]
     }
 
     buildTypes {
@@ -44,4 +48,8 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    implementation "io.appwrite:sdk-for-android:4.0.0"
 }

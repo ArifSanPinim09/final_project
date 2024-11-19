@@ -17,6 +17,7 @@ abstract class Routes {
   static const USER_SEARCH = _Paths.USER_SEARCH;
   static const ADMIN_INCOME = _Paths.ADMIN_INCOME;
   static const ADMIN_PROFILE = _Paths.ADMIN_PROFILE;
+  static const SEARCH_FIELD = _Paths.SEARCH_FIELD;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const USER_SEARCH = '/user-search';
   static const ADMIN_INCOME = '/admin-income';
   static const ADMIN_PROFILE = '/admin-profile';
+  static const SEARCH_FIELD = '/search-field';
 }

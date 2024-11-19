@@ -147,7 +147,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                           style: const TextStyle(color: Colors.white),
                           onSubmitted: (query) {
-                            // Search logic
+                            Get.toNamed("/search-field");
                           },
                         ),
                       ),

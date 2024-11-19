@@ -20,6 +20,8 @@ import '../modules/lapangan/bindings/lapangan_binding.dart';
 import '../modules/lapangan/views/lapangan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/search_field/bindings/search_field_binding.dart';
+import '../modules/search_field/views/search_field_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/user_navbar/bindings/user_navbar_binding.dart';
@@ -92,6 +94,11 @@ class AppPages {
       name: _Paths.ADMIN_PROFILE,
       page: () => const AdminProfileView(),
       binding: AdminProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH_FIELD,
+      page: () => const SearchFieldView(),
+      binding: SearchFieldBinding(),
     ),
   ];
 }

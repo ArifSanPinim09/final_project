@@ -1,5 +1,6 @@
 import 'package:final_project/app/materials/appcolors.dart';
 import 'package:final_project/app/modules/widget/button_widget.dart';
+import 'package:final_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -102,7 +103,9 @@ class FieldDetailView extends GetView<FieldDetailController> {
               Text(controller.listLapangan["harga"]!,style: TextStyle(fontFamily: 'mulish',fontWeight: FontWeight.bold,fontSize: 20),),
             ],),
             SizedBox(height: 15,),
-            Button(onPressed: (){}, text: "Sewa Sekarang")
+            Button(onPressed: (){
+              Get.toNamed("/pesanan");
+            }, text: "Sewa Sekarang")
           ],),
       ),
       body: Container(

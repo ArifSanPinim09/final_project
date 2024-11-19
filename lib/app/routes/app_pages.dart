@@ -22,6 +22,8 @@ import '../modules/lapangan/bindings/lapangan_binding.dart';
 import '../modules/lapangan/views/lapangan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/pesanan/bindings/pesanan_binding.dart';
+import '../modules/pesanan/views/pesanan_view.dart';
 import '../modules/search_field/bindings/search_field_binding.dart';
 import '../modules/search_field/views/search_field_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
@@ -106,6 +108,11 @@ class AppPages {
       name: _Paths.FIELD_DETAIL,
       page: () => const FieldDetailView(),
       binding: FieldDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.PESANAN,
+      page: () => const PesananView(),
+      binding: PesananBinding(),
     ),
   ];
 }

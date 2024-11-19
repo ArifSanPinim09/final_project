@@ -1,5 +1,6 @@
 import 'package:final_project/app/materials/appcolors.dart';
 import 'package:final_project/app/modules/widget/button_widget.dart';
+import 'package:final_project/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -47,6 +48,7 @@ class PesananView extends GetView<PesananController> {
             ],),
             SizedBox(height: 15,),
             Button(onPressed: (){
+              Get.toNamed(Routes.KONFIRMASI_PEMBAYARAN);
             }, text: "Pembayaran")
           ],),
       ),

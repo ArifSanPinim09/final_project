@@ -18,6 +18,8 @@ import '../modules/field_detail/bindings/field_detail_binding.dart';
 import '../modules/field_detail/views/field_detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/konfirmasi_pembayaran/bindings/konfirmasi_pembayaran_binding.dart';
+import '../modules/konfirmasi_pembayaran/views/konfirmasi_pembayaran_view.dart';
 import '../modules/lapangan/bindings/lapangan_binding.dart';
 import '../modules/lapangan/views/lapangan_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -113,6 +115,11 @@ class AppPages {
       name: _Paths.PESANAN,
       page: () => const PesananView(),
       binding: PesananBinding(),
+    ),
+    GetPage(
+      name: _Paths.KONFIRMASI_PEMBAYARAN,
+      page: () => const KonfirmasiPembayaranView(),
+      binding: KonfirmasiPembayaranBinding(),
     ),
   ];
 }

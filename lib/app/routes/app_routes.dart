@@ -24,6 +24,7 @@ abstract class Routes {
   static const PEMBAYARAN_SUKSES = _Paths.PEMBAYARAN_SUKSES;
   static const TIKET = _Paths.TIKET;
   static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const PEMESANAN = _Paths.PEMESANAN;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const PEMBAYARAN_SUKSES = '/pembayaran-sukses';
   static const TIKET = '/tiket';
   static const USER_PROFILE = '/user-profile';
+  static const PEMESANAN = '/pemesanan';
 }

@@ -82,53 +82,59 @@ class HomeView extends GetView<HomeController> {
                       const SizedBox(width: 10),
                       const Text(
                         'Halo, Alfan',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Mulish',
+                        ),
                       ),
                       const Spacer(),
                       IconButton(
-                          onPressed: () async {
-                            final shouldLogout = await showDialog(
-                              context: context,
-                              builder: (context) => AlertDialog(
-                                backgroundColor: Colors.white,
-                                title: const Text(
-                                  'Logout',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Mulish'),
+                        onPressed: () async {
+                          final shouldLogout = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              backgroundColor: Colors.white,
+                              title: const Text(
+                                'Logout',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  fontFamily: 'Mulish',
                                 ),
-                                content: const Text(
-                                  'Are you sure you want to logout?',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Mulish'),
-                                ),
-                                actions: [
-                                  Button(
-                                    onPressed: () =>
-                                        Navigator.pop(context, false),
-                                    text: 'Cancel',
-                                  ),
-                                  const SizedBox(height: 8.0),
-                                  Button(
-                                    onPressed: () =>
-                                        Navigator.pop(context, true),
-                                    text: 'Logout',
-                                  ),
-                                ],
                               ),
-                            );
-                            if (shouldLogout ?? false) {
-                              await controller.auth.signOut();
-                            }
-                          },
-                          icon: const Icon(
-                            Icons.logout,
-                            color: Colors.white,
-                          )),
+                              content: const Text(
+                                'Are you sure you want to logout?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Mulish',
+                                ),
+                              ),
+                              actions: [
+                                Button(
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                  text: 'Cancel',
+                                ),
+                                const SizedBox(height: 8.0),
+                                Button(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  text: 'Logout',
+                                ),
+                              ],
+                            ),
+                          );
+                          if (shouldLogout ?? false) {
+                            await controller.auth.signOut();
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.logout,
+                          color: Colors.white,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 30),
@@ -139,6 +145,7 @@ class HomeView extends GetView<HomeController> {
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'Mulish',
                       ),
                     ),
                   ),
@@ -150,7 +157,10 @@ class HomeView extends GetView<HomeController> {
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Cari lapangan',
-                            hintStyle: TextStyle(color: Colors.grey[400]),
+                            hintStyle: TextStyle(
+                              color: Colors.grey[400],
+                              fontFamily: 'Mulish',
+                            ),
                             prefixIcon:
                                 const Icon(Icons.search, color: Colors.grey),
                             filled: true,
@@ -160,9 +170,14 @@ class HomeView extends GetView<HomeController> {
                               borderSide: BorderSide.none,
                             ),
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 17, horizontal: 17),
+                              vertical: 17,
+                              horizontal: 17,
+                            ),
                           ),
-                          style: const TextStyle(color: Colors.white),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Mulish',
+                          ),
                           onSubmitted: (query) {
                             Get.toNamed("/search-field");
                           },
@@ -180,10 +195,15 @@ class HomeView extends GetView<HomeController> {
                           ),
                           child: DropdownButton<String>(
                             value: 'Jakarta',
-                            icon: const Icon(Icons.arrow_drop_down_rounded,
-                                color: Colors.white),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_rounded,
+                              color: Colors.white,
+                            ),
                             dropdownColor: const Color(0xFF28293F),
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Mulish',
+                            ),
                             underline: Container(),
                             isDense: true,
                             onChanged: (String? newValue) {},
@@ -218,14 +238,21 @@ class HomeView extends GetView<HomeController> {
                     return Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Container(
-                        // width: 100,
                         decoration: BoxDecoration(
-                            color: containerColor,
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: const Color(0xFFDFDFDF))),
+                          color: containerColor,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(color: const Color(0xFFDFDFDF)),
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Center(child: Text(item['name'])),
+                          child: Center(
+                            child: Text(
+                              item['name'],
+                              style: const TextStyle(
+                                fontFamily: 'Mulish',
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     );
@@ -249,6 +276,7 @@ class HomeView extends GetView<HomeController> {
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
+                          fontFamily: 'Mulish',
                         ),
                       ),
                       TextButton(
@@ -265,6 +293,7 @@ class HomeView extends GetView<HomeController> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.black,
+                                fontFamily: 'Mulish',
                               ),
                             ),
                             SizedBox(width: 5),
@@ -331,6 +360,7 @@ class HomeView extends GetView<HomeController> {
                                               style: const TextStyle(
                                                 fontSize: 22,
                                                 fontWeight: FontWeight.bold,
+                                                fontFamily: 'Mulish',
                                               ),
                                             ),
                                           ),
@@ -341,6 +371,7 @@ class HomeView extends GetView<HomeController> {
                                               item['alamat'],
                                               style: const TextStyle(
                                                 fontSize: 15,
+                                                fontFamily: 'Mulish',
                                               ),
                                             ),
                                           ),
@@ -361,6 +392,7 @@ class HomeView extends GetView<HomeController> {
                                                   Text(
                                                     item['bintang'],
                                                     style: const TextStyle(
+                                                      fontFamily: 'Mulish',
                                                       fontSize: 15,
                                                     ),
                                                   ),
@@ -374,6 +406,7 @@ class HomeView extends GetView<HomeController> {
                                                       text: item['harga']
                                                           .split('/')[0],
                                                       style: const TextStyle(
+                                                        fontFamily: 'Mulish',
                                                         fontSize: 20,
                                                         color: Colors.black,
                                                         fontWeight:
@@ -384,6 +417,7 @@ class HomeView extends GetView<HomeController> {
                                                       text:
                                                           '/${item['harga'].split('/')[1]}',
                                                       style: const TextStyle(
+                                                        fontFamily: 'Mulish',
                                                         fontSize: 15,
                                                         color: Colors.black,
                                                       ),

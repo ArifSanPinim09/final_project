@@ -26,6 +26,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/pembayaran_sukses/bindings/pembayaran_sukses_binding.dart';
 import '../modules/pembayaran_sukses/views/pembayaran_sukses_view.dart';
+import '../modules/pemesanan/bindings/pemesanan_binding.dart';
+import '../modules/pemesanan/views/pemesanan_view.dart';
 import '../modules/pesanan/bindings/pesanan_binding.dart';
 import '../modules/pesanan/views/pesanan_view.dart';
 import '../modules/search_field/bindings/search_field_binding.dart';
@@ -141,6 +143,11 @@ class AppPages {
       name: _Paths.USER_PROFILE,
       page: () => const UserProfileView(),
       binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.PEMESANAN,
+      page: () => const PemesananView(),
+      binding: PemesananBinding(),
     ),
   ];
 }

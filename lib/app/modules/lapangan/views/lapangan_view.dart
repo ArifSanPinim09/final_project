@@ -34,6 +34,7 @@ class LapanganView extends GetView<LapanganController> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Mulish', // Font Mulish diterapkan
                     ),
                   ),
                 ],
@@ -54,6 +55,7 @@ class LapanganView extends GetView<LapanganController> {
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
+                          fontFamily: 'Mulish', // Font Mulish diterapkan
                         ),
                       ),
                     );
@@ -64,127 +66,139 @@ class LapanganView extends GetView<LapanganController> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 15),
                     child: GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         Get.toNamed("field-detail");
                       },
-                      child:
-                        Card(
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(20),
-                                      child: Image.network(
-                                        item['foto'],
-                                        height: 95,
-                                        width: 95,
-                                        fit: BoxFit.cover,
-                                      ),
+                      child: Card(
+                        elevation: 4,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20),
+                                    child: Image.network(
+                                      item['foto'],
+                                      height: 95,
+                                      width: 95,
+                                      fit: BoxFit.cover,
                                     ),
-                                    const SizedBox(width: 15),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          // Nama lapangan
-                                          Text(
-                                            item['name'],
-                                            style: const TextStyle(
-                                              fontSize: 19,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 5),
-                                          // Alamat
-                                          Text(
-                                            item['alamat'],
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 10),
-                                          // Bintang dan Harga
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              // Bintang
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.star,
-                                                    color: Colors.amber,
-                                                    size: 20,
-                                                  ),
-                                                  const SizedBox(width: 5),
-                                                  Text(
-                                                    item['bintang'],
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              // Harga
-                                              Text(
-                                                item['harga'],
-                                                style: const TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
-                                // Divider
-                                const Divider(
-                                  color: Colors.grey,
-                                  thickness: 1,
-                                ),
-                                const SizedBox(height: 0),
-                                const Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      'Availabe 10 Slot Today',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                      ),
-                                    ),
-                                    Row(
+                                  ),
+                                  const SizedBox(width: 15),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Icon(
-                                          Icons.percent,
-                                          size: 15,
-                                          color: Colors.orange,
-                                        ),
+                                        // Nama lapangan
                                         Text(
-                                          'Dapatkan Diskon 5%',
-                                          style: TextStyle(
-                                            fontSize: 12,
+                                          item['name'],
+                                          style: const TextStyle(
+                                            fontSize: 19,
+                                            fontWeight: FontWeight.bold,
+                                            fontFamily: 'Mulish', // Font Mulish
                                           ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        // Alamat
+                                        Text(
+                                          item['alamat'],
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Mulish', // Font Mulish
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        // Bintang dan Harga
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // Bintang
+                                            Row(
+                                              children: [
+                                                const Icon(
+                                                  Icons.star,
+                                                  color: Colors.amber,
+                                                  size: 20,
+                                                ),
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  item['bintang'],
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        'Mulish', // Font Mulish
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            // Harga
+                                            Text(
+                                              item['harga'],
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily:
+                                                    'Mulish', // Font Mulish
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              const Row(
+                                children: [
+                                  Expanded(
+                                    child: Divider(
+                                      color: Colors.grey,
+                                      thickness: 1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Availabe 10 Slot Today',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontFamily: 'Mulish', // Font Mulish
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.percent,
+                                        size: 15,
+                                        color: Colors.orange,
+                                      ),
+                                      Text(
+                                        'Dapatkan Diskon 5%',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: 'Mulish', // Font Mulish
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
+                      ),
                     ),
                   );
                 },

@@ -100,7 +100,7 @@ class FieldDetailView extends GetView<FieldDetailController> {
           Column(mainAxisSize: MainAxisSize.min, children: [
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,children: [
               Text("Harga lapangan perjam",style: TextStyle(fontFamily: 'mulish',fontSize: 15),),
-              Text(controller.listLapangan["harga"]!,style: TextStyle(fontFamily: 'mulish',fontWeight: FontWeight.bold,fontSize: 20),),
+              Text("Rp. "+controller.listLapangan["harga"]!,style: TextStyle(fontFamily: 'mulish',fontWeight: FontWeight.bold,fontSize: 20),),
             ],),
             SizedBox(height: 15,),
             Button(onPressed: (){

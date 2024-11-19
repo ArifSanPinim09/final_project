@@ -272,7 +272,11 @@ class HomeView extends GetView<HomeController> {
                       final item = listLapangan[index];
                       return Transform.translate(
                         offset: const Offset(0, -10), // Geser ke atas
-                        child: SizedBox(
+                        child: GestureDetector(
+                          onTap: (){
+                            Get.toNamed("field-detail");
+                          },
+                          child: SizedBox(
                           height: 230,
                           width: 260,
                           child: Card(
@@ -375,7 +379,7 @@ class HomeView extends GetView<HomeController> {
                               ],
                             ),
                           ),
-                        ),
+                        ),)
                       );
                     },
                     separatorBuilder: (context, index) =>

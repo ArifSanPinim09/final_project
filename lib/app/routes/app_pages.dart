@@ -14,6 +14,8 @@ import '../modules/admin_profile/bindings/admin_profile_binding.dart';
 import '../modules/admin_profile/views/admin_profile_view.dart';
 import '../modules/complete_profile/bindings/complete_profile_binding.dart';
 import '../modules/complete_profile/views/complete_profile_view.dart';
+import '../modules/field_detail/bindings/field_detail_binding.dart';
+import '../modules/field_detail/views/field_detail_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/lapangan/bindings/lapangan_binding.dart';
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.SEARCH_FIELD,
       page: () => const SearchFieldView(),
       binding: SearchFieldBinding(),
+    ),
+    GetPage(
+      name: _Paths.FIELD_DETAIL,
+      page: () => const FieldDetailView(),
+      binding: FieldDetailBinding(),
     ),
   ];
 }

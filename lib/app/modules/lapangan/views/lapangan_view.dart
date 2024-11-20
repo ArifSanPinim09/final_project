@@ -1,210 +1,152 @@
+import 'package:final_project/app/modules/lapangan/controllers/lapangan_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../controllers/lapangan_controller.dart';
 
 class LapanganView extends GetView<LapanganController> {
   const LapanganView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Daftar data dummy untuk kartu
-    final List<Map<String, dynamic>> listLapangan = List.generate(10, (index) {
-      return {
-        'foto':
-            'https://i.pinimg.com/736x/83/dc/63/83dc631767dab6612d223b8a5f817549.jpg',
-        'name': 'CGV Sport Hall FX', // Nama lapangan
-        'alamat': 'Jln. Jend. Sudirman No.25', // Alamat
-        'bintang': '4.2(40)', // Rating
-        'harga': '300/jam', // Harga
-      };
-    });
-
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20),
-              child: Row(
-                children: [
-                  Text(
-                    'Sedang promo nih',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Mulish', // Font Mulish diterapkan
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                itemCount:
-                    listLapangan.length + 1, // Tambahkan 1 untuk teks tambahan
-                itemBuilder: (context, index) {
-                  if (index == 2) {
-                    // Tampilkan teks setelah kartu kedua
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Lapangan terdekat',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Mulish', // Font Mulish diterapkan
-                        ),
-                      ),
-                    );
-                  }
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Lapangan"),
+      ),
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            _buildHeader("Sedang Promo"),
+            _buildFieldList(context, isPromo: true),
+          ],
+        ),
+      ),
+    );
+  }
 
-                  // Data kartu
-                  final item = listLapangan[index > 2 ? index - 1 : index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 15),
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed("field-detail");
-                      },
-                      child: Card(
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+  Widget _buildHeader(String title) {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+        child: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Mulish',
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFieldList(BuildContext context, {required bool isPromo}) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, index) => _buildFieldCard(context),
+          childCount: isPromo ? 2 : 8,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFieldCard(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 2,
+      child: InkWell(
+        onTap: () => Get.toNamed("field-detail"),
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  'https://i.pinimg.com/736x/83/dc/63/83dc631767dab6612d223b8a5f817549.jpg',
+                  height: 80,
+                  width: 80,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'CGV Sport Hall FX',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Mulish',
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Jln. Jend. Sudirman No.25',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                        fontFamily: 'Mulish',
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Row(
+                      children: [
+                        Icon(Icons.star, size: 16, color: Colors.amber),
+                        SizedBox(width: 4),
+                        Text(
+                          '4.2 (40)',
+                          style: TextStyle(fontSize: 12),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: Image.network(
-                                      item['foto'],
-                                      height: 95,
-                                      width: 95,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        // Nama lapangan
-                                        Text(
-                                          item['name'],
-                                          style: const TextStyle(
-                                            fontSize: 19,
-                                            fontWeight: FontWeight.bold,
-                                            fontFamily: 'Mulish', // Font Mulish
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        // Alamat
-                                        Text(
-                                          item['alamat'],
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            fontFamily: 'Mulish', // Font Mulish
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10),
-                                        // Bintang dan Harga
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            // Bintang
-                                            Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
-                                                  size: 20,
-                                                ),
-                                                const SizedBox(width: 5),
-                                                Text(
-                                                  item['bintang'],
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                        'Mulish', // Font Mulish
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            // Harga
-                                            Text(
-                                              item['harga'],
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily:
-                                                    'Mulish', // Font Mulish
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 10),
-                              const Row(
-                                children: [
-                                  Expanded(
-                                    child: Divider(
-                                      color: Colors.grey,
-                                      thickness: 1,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Availabe 10 Slot Today',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: 'Mulish', // Font Mulish
-                                    ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.percent,
-                                        size: 15,
-                                        color: Colors.orange,
-                                      ),
-                                      Text(
-                                        'Dapatkan Diskon 5%',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Mulish', // Font Mulish
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                        Spacer(),
+                        Text(
+                          '300k/jam',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  );
-                },
+                    const Divider(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '10 slot tersedia',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const Row(
+                          children: [
+                            Icon(Icons.percent, size: 14, color: Colors.orange),
+                            SizedBox(width: 4),
+                            Text(
+                              'Diskon 5%',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.orange,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -37,6 +37,7 @@ class AdminAddFieldView extends GetView<AdminAddFieldController> {
         onPressed: () => Navigator.pop(context),
         icon: SvgPicture.asset('assets/icons/arrow_left3.svg'),
       ),
+      centerTitle: true,
       title: const Text(
         "Mendaftarkan Lapangan",
         style: TextStyle(

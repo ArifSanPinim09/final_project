@@ -14,6 +14,8 @@ class PemesananView extends GetView<PemesananController> {
       child: Scaffold(
         backgroundColor: const Color(0xFFF5F5F5),
         appBar: AppBar(
+          centerTitle: true,
+          title: const Text("Pemesanan"),
           backgroundColor: Colors.white,
           elevation: 0,
           bottom: TabBar(

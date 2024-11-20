@@ -1,6 +1,7 @@
+import 'package:final_project/app/materials/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_svg/flutter_svg.dart'; // Import the svg package
+import 'package:flutter_svg/flutter_svg.dart';
 import '../controllers/pemesanan_controller.dart';
 
 class PemesananView extends GetView<PemesananController> {
@@ -8,369 +9,168 @@ class PemesananView extends GetView<PemesananController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          const SizedBox(height: 50),
-          const Row(
-            children: [
-              Expanded(
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-              ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF5F5F5),
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          bottom: TabBar(
+            labelColor: const Color(0xff211A2C),
+            unselectedLabelColor: Colors.grey,
+            indicatorColor: Appcolors.yellow,
+            labelStyle: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Mulish',
+            ),
+            tabs: const [
+              Tab(text: 'Pemesanan Berlangsung'),
+              Tab(text: 'Riwayat Pemesanan'),
             ],
           ),
-          const SizedBox(height: 8),
+        ),
+        body: TabBarView(
+          children: [
+            _buildActiveBookingsTab(),
+            _buildBookingHistoryTab(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActiveBookingsTab() {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
+            padding: EdgeInsets.all(20),
+            child: Text(
+              'Penyewaan Lapangan Anda',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          _buildBookingCard(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBookingHistoryTab() {
+    return const Center(
+      child: Text('Riwayat Pemesanan'),
+    );
+  }
+
+  Widget _buildBookingCard() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xff211A2C),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+            ),
+            child: const Text(
+              'CGV Sport Hall FX',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(16),
+            color: Colors.amber.shade300,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  'Pemesanan Berlangsung',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Mulish',
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/icons/ic_field.svg',
+                    width: 32,
+                    height: 32,
                   ),
                 ),
-                Text(
-                  'Riwayat Pemesanan',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.grey,
-                    fontFamily: 'Mulish',
+                const SizedBox(width: 12),
+                const Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Lapangan A',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Rabu, 20 November 2024',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                      Text(
+                        'Pukul 12:00',
+                        style: TextStyle(fontSize: 13),
+                      ),
+                    ],
                   ),
                 ),
+                // TextButton(
+                //   onPressed: () {},
+                //   style: TextButton.styleFrom(
+                //     backgroundColor: const Color(0xff211A2C),
+                //     padding: const EdgeInsets.symmetric(
+                //       horizontal: 12,
+                //       vertical: 8,
+                //     ),
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //   ),
+                //   child: const Text(
+                //     'Chat',
+                //     style: TextStyle(
+                //       color: Colors.white,
+                //       fontSize: 12,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
-          const SizedBox(height: 8),
-          const Row(
-            children: [
-              Expanded(
-                child: Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: Text(
-                  'Penyewaan lapangan anda',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontFamily: 'Mulish',
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 40,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                      color: Color(0xff211A2C), // Blue background
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: const Text(
-                      'CGV Sport Hall FX',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'Mulish',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    height: 70,
-                    width: double.infinity,
-                    color: Colors.amber,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SvgPicture.asset(
-                            'assets/icons/ic_field.svg',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Lapangan A',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                            Text(
-                              'Rabu 20 November 2024',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                            Text(
-                              'Pukul 12.00',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: GestureDetector(
-                            onTap: () {
-                              print("Chat Penyewa tapped");
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: const Color(0xff211A2C),
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: const Text(
-                                'Chat Penyewa',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: 'Mulish',
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 45,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),
-                      color: Colors.white,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Lihat E-Tiket',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.blue,
-                          fontFamily: 'Mulish',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-          const Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25),
-                child: Text(
-                  'Turnamen Futsal',
-                  style: TextStyle(
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                    fontFamily: 'Mulish',
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 40,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(15),
-                        topRight: Radius.circular(15),
-                      ),
-                      color: Color(0xff211A2C), // Blue background
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: const Text(
-                      'CGV Sport Hall FX',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontFamily: 'Mulish',
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    height: 70,
-                    width: double.infinity,
-                    color: Colors.amber,
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 10),
-                          child: SvgPicture.asset(
-                            'assets/icons/ic_field.svg',
-                            width: 50,
-                            height: 50,
-                          ),
-                        ),
-                        const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Lapangan B',
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                            Text(
-                              'Sabtu 23 November 2024',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                            Text(
-                              'Pukul 10.00',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black,
-                                fontFamily: 'Mulish',
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: GestureDetector(
-                            onTap: () {
-                              print("Chat Penyewa tapped");
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 10),
-                              decoration: BoxDecoration(
-                                color: const Color(0xff211A2C),
-                                borderRadius: BorderRadius.circular(7),
-                              ),
-                              child: const Text(
-                                'Chat Penyewa',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontFamily: 'Mulish',
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 45,
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      ),
-                      color: Colors.white,
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: Text(
-                        'Lihat E-Tiket',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.blue,
-                          fontFamily: 'Mulish',
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ),
-                ],
+          TextButton(
+            onPressed: () {},
+            child: const Text(
+              'Lihat E-Tiket',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.blue,
               ),
             ),
           ),

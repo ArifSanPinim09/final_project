@@ -39,31 +39,29 @@ class AuthService extends GetxService {
 
   Future<void> _loadUserData(dynamic user) async {
     try {
-      // Coba ambil dokumen user
       final response = await databases.getDocument(
         databaseId: AppwriteConfig.databaseId,
-        collectionId: '673b134400091f1fdd26',
+        collectionId: AppwriteConfig.colectioUserId,
         documentId: user.$id,
       );
 
-      // Data ditemukan
       currentUser.value = UserModel.fromJson({
         ...response.data,
         'uid': response.$id,
       });
     } catch (e) {
-      // Jika dokumen tidak ditemukan, buat dokumen baru
       final newUser = UserModel(
         uid: user.$id,
         email: user.email,
         phone: user.phone ?? '',
+        role: 'penyewa',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
 
       await databases.createDocument(
         databaseId: AppwriteConfig.databaseId,
-        collectionId: '673b134400091f1fdd26',
+        collectionId: AppwriteConfig.colectioUserId,
         documentId: user.$id,
         data: newUser.toJson(),
       );
@@ -74,10 +72,8 @@ class AuthService extends GetxService {
 
   void _handleUserChanged(UserModel? user) {
     if (user != null && !user.isProfileComplete) {
-      // Data user belum lengkap, arahkan ke halaman complete_profile
       Get.offAllNamed('/complete-profile');
     } else if (user != null && user.isProfileComplete) {
-      // Data user lengkap, arahkan sesuai role
       switch (user.role) {
         case 'penyewa':
           Get.offAllNamed('/user-navbar');
@@ -87,7 +83,7 @@ class AuthService extends GetxService {
           break;
         default:
           Get.snackbar('Error', 'Role tidak valid');
-          Get.offAllNamed('/error-page'); // Redirect ke halaman error
+          Get.offAllNamed('/error-page');
       }
     }
   }
@@ -95,7 +91,6 @@ class AuthService extends GetxService {
   Future<void> signInWithGoogle() async {
     try {
       await account.createOAuth2Session(provider: OAuthProvider.google);
-      await Future.delayed(const Duration(microseconds: 500));
       final user = await account.get();
       await _loadUserData(user);
     } on AppwriteException catch (e) {
@@ -108,33 +103,30 @@ class AuthService extends GetxService {
     required String name,
     required String birthDate,
     required String address,
-    required String role,
     required String phone,
   }) async {
     try {
       final user = currentUser.value;
       if (user != null) {
-        // Perbarui data user
         final updatedUser = UserModel(
           uid: user.uid,
           name: name,
           email: user.email,
-          phone: user.phone,
+          phone: phone,
           birthDate: birthDate,
           address: address,
-          role: role,
+          role: user.role ?? 'penyewa',
           createdAt: user.createdAt,
           updatedAt: DateTime.now(),
         );
 
         await databases.updateDocument(
           databaseId: AppwriteConfig.databaseId,
-          collectionId: '673b134400091f1fdd26',
+          collectionId: AppwriteConfig.colectioUserId,
           documentId: user.uid,
           data: updatedUser.toJson(),
         );
 
-        // Update state currentUser
         currentUser.value = updatedUser;
       }
     } catch (e) {
@@ -145,13 +137,8 @@ class AuthService extends GetxService {
 
   Future<void> signOut() async {
     try {
-      // Hapus semua controller yang mungkin aktif
-      Get.reset(); // Reset seluruh GetX state
-
       await account.deleteSession(sessionId: 'current');
       currentUser.value = null;
-
-      // Navigasi ke login
       Get.offAll(() => const LoginView());
     } catch (e) {
       Get.snackbar('Error', 'Gagal logout: ${e.toString()}');

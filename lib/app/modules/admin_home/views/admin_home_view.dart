@@ -17,7 +17,6 @@ class AdminHomeView extends GetView<AdminHomeController> {
           children: [
             // Header
             Container(
-              height: 262,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: Color(0xff211A2C),
@@ -63,7 +62,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
                     height: 25.0,
                   ),
                   const Text(
-                    'Daftarkan lapangan kamu dan dapatkan penghasilan',
+                    'Tambahkan lapangan dan dapatkan penghasilan',
                     style: TextStyle(
                       fontFamily: 'Mulish',
                       color: Colors.white,
@@ -71,13 +70,13 @@ class AdminHomeView extends GetView<AdminHomeController> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
-                    height: 25.0,
-                  ),
+                  SizedBox(height: 22.0),
                   Button(
-                    onPressed: () {},
-                    text: 'Daftar Membership',
-                  ),
+                    onPressed: () {
+                      Get.toNamed('admin-add-field');
+                    },
+                    text: "Tambahkan Lapangan",
+                  )
                 ],
               ),
             ),
@@ -189,7 +188,6 @@ class AdminHomeView extends GetView<AdminHomeController> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(
                 top: 20,

@@ -10,12 +10,7 @@ class CompleteProfileController extends GetxController {
   final addressController = TextEditingController();
   final phoneController = TextEditingController();
 
-  final selectedRole = Rx<String?>(null);
   final isLoading = false.obs;
-
-  void selectRole(String role) {
-    selectedRole.value = role;
-  }
 
   Future<void> submitProfile() async {
     if (!_validateInputs()) return;
@@ -26,7 +21,6 @@ class CompleteProfileController extends GetxController {
         name: nameController.text,
         birthDate: birthDateController.text,
         address: addressController.text,
-        role: selectedRole.value!,
         phone: phoneController.text,
       );
     } finally {
@@ -55,10 +49,7 @@ class CompleteProfileController extends GetxController {
       Get.snackbar('Error', 'Masukkan nomor HP yang valid dan terhubung WA');
       return false;
     }
-    if (selectedRole.value == null) {
-      Get.snackbar('Error', 'Pilih role anda');
-      return false;
-    }
+
     return true;
   }
 

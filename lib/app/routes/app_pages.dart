@@ -92,7 +92,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LAPANGAN,
-      page: () => LapanganView(),
+      page: () => const LapanganView(),
       binding: LapanganBinding(),
     ),
     GetPage(

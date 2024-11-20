@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:appwrite/appwrite.dart';
+import 'package:final_project/app/data/config/appwrite_config.dart';
 import 'package:final_project/app/data/services/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CompleteProfileController extends GetxController {
   final AuthService _authService = Get.find<AuthService>();
+  final Storage storage = Storage(Get.find<Client>());
 
   final nameController = TextEditingController();
   final birthDateController = TextEditingController();
@@ -11,6 +17,33 @@ class CompleteProfileController extends GetxController {
   final phoneController = TextEditingController();
 
   final isLoading = false.obs;
+  final imageFile = Rx<File?>(null);
+  final imageId = Rx<String?>(null);
+
+  Future<void> pickImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      imageFile.value = File(pickedFile.path);
+      await uploadImage();
+    }
+  }
+
+  Future<void> uploadImage() async {
+    try {
+      if (imageFile.value != null) {
+        final file = await storage.createFile(
+          bucketId: AppwriteConfig.bucketId,
+          fileId: ID.unique(),
+          file: InputFile.fromPath(path: imageFile.value!.path),
+        );
+        imageId.value = file.$id;
+      }
+    } catch (e) {
+      print(e.toString());
+      Get.snackbar('Error', 'Failed to upload image');
+    }
+  }
 
   Future<void> submitProfile() async {
     if (!_validateInputs()) return;
@@ -22,6 +55,7 @@ class CompleteProfileController extends GetxController {
         birthDate: birthDateController.text,
         address: addressController.text,
         phone: phoneController.text,
+        imageId: imageId.value,
       );
     } finally {
       isLoading.value = false;

@@ -1,3 +1,5 @@
+import 'package:final_project/app/modules/user_profile/bindings/user_profile_binding.dart';
+import 'package:final_project/app/modules/user_profile/views/user_profile_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/admin_add_field/bindings/admin_add_field_binding.dart';
@@ -135,6 +137,11 @@ class AppPages {
       name: _Paths.TIKET,
       page: () => const TiketView(),
       binding: TiketBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_PROFILE,
+      page: () => const UserProfileView(),
+      binding: UserProfileBinding(),
     ),
   ];
 }

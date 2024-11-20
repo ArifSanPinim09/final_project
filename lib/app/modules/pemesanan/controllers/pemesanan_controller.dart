@@ -1,23 +1,9 @@
 import 'package:get/get.dart';
 
 class PemesananController extends GetxController {
-  //TODO: Implement PemesananController
+  final selectedTab = 0.obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void changeTab(int index) {
+    selectedTab.value = index;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

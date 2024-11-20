@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:final_project/app/modules/widget/imagelistview_widget.dart';
 import 'package:final_project/app/modules/widget/togglebutton_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,7 @@ class AdminAddFieldController extends GetxController {
   TextEditingController capacitycontroller = TextEditingController();
 
   var returnedimage = Rx<XFile?>(null);
+  final imagelist = <File?>[].obs;
 
   var category = "Basket".obs;
   var discountselectbutton = SelectbuttonWidget(const [0, 25, 50, 75, 100]);
@@ -25,6 +28,39 @@ class AdminAddFieldController extends GetxController {
     "Ruang Tunggu",
     "Ruang Ganti"
   ]);
+
+  // In AdminAddFieldController
+  final currentStep = 0.obs;
+
+  void nextStep() {
+    if (currentStep.value < 3) {
+      currentStep.value++;
+    }
+  }
+
+  void previousStep() {
+    if (currentStep.value > 0) {
+      currentStep.value--;
+    }
+  }
+
+  // In AdminAddFieldController
+  final selectedFacilities = <String>[].obs;
+
+  void toggleFacility(String facility) {
+    if (selectedFacilities.contains(facility)) {
+      selectedFacilities.remove(facility);
+    } else {
+      selectedFacilities.add(facility);
+    }
+  }
+
+  void removeImage(int index) {
+    if (index < imagelist.length) {
+      imagelist[index] = null;
+      imagelist.refresh();
+    }
+  }
 
   var imageview = ImagelistviewWidget();
 
@@ -47,7 +83,7 @@ class AdminAddFieldController extends GetxController {
 
   get discount => discountselectbutton.getitemselected;
   get price => priceselectbutton.getitemselected;
-  get imagelist => imageview.listimage;
+
   get facility => facilitytogglebutton.getselections;
 
   @override

@@ -10,6 +10,8 @@ class AuthService extends GetxService {
   late final Account account;
   late final Databases databases;
 
+  Client getClient() => client;
+
   final Rx<UserModel?> currentUser = Rx<UserModel?>(null);
 
   @override
@@ -18,7 +20,8 @@ class AuthService extends GetxService {
 
     client = Client()
         .setEndpoint(AppwriteConfig.endpoint)
-        .setProject(AppwriteConfig.projectId);
+        .setProject(AppwriteConfig.projectId)
+      ..setSelfSigned(status: true);
 
     account = Account(client);
     databases = Databases(client);
@@ -104,6 +107,7 @@ class AuthService extends GetxService {
     required String birthDate,
     required String address,
     required String phone,
+    String? imageId,
   }) async {
     try {
       final user = currentUser.value;
@@ -116,6 +120,7 @@ class AuthService extends GetxService {
           birthDate: birthDate,
           address: address,
           role: user.role ?? 'penyewa',
+          imageId: imageId,
           createdAt: user.createdAt,
           updatedAt: DateTime.now(),
         );

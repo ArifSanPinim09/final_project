@@ -22,6 +22,7 @@ abstract class Routes {
   static const PESANAN = _Paths.PESANAN;
   static const KONFIRMASI_PEMBAYARAN = _Paths.KONFIRMASI_PEMBAYARAN;
   static const PEMBAYARAN_SUKSES = _Paths.PEMBAYARAN_SUKSES;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
   static const TIKET = _Paths.TIKET;
   static const SCHEDULE = _Paths.SCHEDULE;
 }
@@ -48,5 +49,6 @@ abstract class _Paths {
   static const KONFIRMASI_PEMBAYARAN = '/konfirmasi-pembayaran';
   static const PEMBAYARAN_SUKSES = '/pembayaran-sukses';
   static const TIKET = '/tiket';
+  static const USER_PROFILE = '/user-profile';
   static const SCHEDULE = '/schedule';
 }
